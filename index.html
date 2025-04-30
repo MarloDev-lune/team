@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Scorp Platform</title>
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #121212, #1f1f1f);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+      color: #ff7b00;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin-bottom: 40px;
+      opacity: 0.7;
+    }
+
+    .btn {
+      padding: 15px 30px;
+      background: #ff7b00;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1em;
+      cursor: pointer;
+      margin: 10px;
+      transition: 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #e96a00;
+      transform: scale(1.05);
+    }
+
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .notice {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #ff7b00;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      animation: fadeout 5s forwards;
+    }
+
+    @keyframes fadeout {
+      0% {opacity: 1;}
+      80% {opacity: 1;}
+      100% {opacity: 0;}
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Welcome to Scorp</h1>
+  <p>Your social world begins here</p>
+
+  <div class="button-group">
+    <button class="btn" onclick="goToLogin()">Login</button>
+    <button class="btn" onclick="showSoon()">Chat</button>
+    <button class="btn" onclick="showSoon()">Call</button>
+    <button class="btn" onclick="showSoon()">Notifications</button>
+    <button class="btn" onclick="showSoon()">Friends</button>
+    <button class="btn" onclick="showSoon()">Search</button>
+  </div>
+
+  <div id="noticeBox" class="notice" style="display:none;">Coming Soon!</div>
+
+  <script>
+    // نقل المستخدم لتسجيل الدخول
+    function goToLogin() {
+      window.location.href = "login.html";
+    }
+
+    // عرض إشعار "قريبًا"
+    function showSoon() {
+      const notice = document.getElementById("noticeBox");
+      notice.style.display = "block";
+      notice.classList.remove("hide");
+      setTimeout(() => {
+        notice.style.display = "none";
+      }, 5000);
+    }
+
+    // حماية دخول وهمية (إن لم يكن مسجل، لا يدخل للصفحة)
+    const isLoggedIn = localStorage.getItem("scorp_logged_in");
+    if (window.location.pathname.endsWith("home.html") && !isLoggedIn) {
+      alert("You must login first.");
+      window.location.href = "login.html";
+    }
+  </script>
+
+</body>
+</html>
